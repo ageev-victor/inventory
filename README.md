@@ -4,11 +4,8 @@
 
 # Страница логина
 ![alt text](/ScreensProject/3.jpg "Страница логина")
-
-
 # Главная страница
 ![alt text](/ScreensProject/1.jpg "Главная страница")
-
 # Страница расширяемых действий
 ![alt text](/ScreensProject/2.jpg "Страница действий")
 
