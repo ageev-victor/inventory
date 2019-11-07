@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8"/>
+    <link type="text/css" rel="stylesheet" data-th-href="@{/css/table_style.css}"/>
+    <link type="text/css" rel="stylesheet" data-th-href="@{/css/link_style.css}"/>
+    <link type="text/css" rel="stylesheet" data-th-href="@{/css/button_style.css}"/>
+    <link type="text/css" rel="stylesheet" data-th-href="@{/css/form_style.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+    <script type="text/javascript" th:src="@{/js/notification_script.js}"></script>
+    <title>Assistant</title>
+    <link data-th-href="@{/css/custom.js}" rel="stylesheet">
+</head>
+
+<body onpageshow="refresh()">
+
+<div align="center">
+    <p></p>
+    <table>
+        <td>
+            <a class="button1" onclick="checkUptime()" th:marginwidth="10" th:href="@{'/checkStatusSubnets'}">Запустить
+                проверку uptime</a></td>
+        <div th:if="${checkServersUptimeIsActive}">
+            <img th:src="@{/images/online.png}" align="center" width="25" height="25">Проверка uptime серверов активна
+        </div>
+        <div th:if="${!checkServersUptimeIsActive}">
+            <img th:src="@{/images/offline.png}" align="center" width="25" height="25">Проверка uptime серверов
+            выключена
+        </div>
+        <td><a class="button1" onclick="stopCheckUptime()" th:marginwidth="10" th:href="@{'/stopCheckStatusSubnets'}">Остановить
+            проверку uptime</a></td>
+    </table>
+    <p></p>
+</div>
+<div align="center">
+    <table>
+        <td><a class="button1" th:marginwidth="10" th:href="@{'/newSubnet'}">Добавить Отделение</a></td>
+        <td><a class="button1" onclick="startInventoryMessage()" th:marginwidth="10"
+               th:href="@{'/startTotalInventory/'}">Запустить инвентаризацию</a></td>
+        <div th:if="${inventoryIsActive}">
+            <img th:src="@{/images/online.png}" align="center" width="25" height="25">Инвентаризация отделений включена
+        </div>
+        <div th:if="${!inventoryIsActive}">
+            <img th:src="@{/images/offline.png}" align="center" width="25" height="25">Инвентаризация отделений
+            выключена
+        </div>
+        <td><a class="button1" onclick="stopInventoryMessage()" th:marginwidth="10" th:href="@{'/stopTotalInventory/'}">Остановить
+            инвентаризацию</a></td>
+    </table>
+    <form class="form-style-5" th:action="@{/findpc}" method="post">
+        <legend>Поиск по имени</legend>
+        <input type="text" th:name="pcname" class="form-control" modelattribute="pcname"/>
+        <input type="submit" value="Найти"/>
+    </form>
+</div>
+<div align="center" id="progress_table">
+    <H3 th:text="'Всего отделений в базе: ' + ${listSubnets.size()} + ' Всего компьютеров в базе: ' + ${countComputers}"></H3>
+    <H3 th:text="'Неработающих отделений: ' + ${offlineSubnets.size()}"></H3>
+    <table class="features-table">
+        <thead>
+        <tr>
+            <td>Прогресс проверки</td>
+            <td>Имя</td>
+            <td class="grey">Проверено компьютеров в отделении</td>
+            <td class="grey">Последняя проверка отделения</td>
+            <td class="grey">Статус сервера</td>
+            <td class="grey">Uptime сервера</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tbody>
+        <tr id="table" th:each="subnet : ${listSubnets}">
+            <td>
+                <progress id="progress_id" th:value="${subnet.checkPercent}" th:max="${subnet.maxPercent}"></progress>
+            </td>
+            <td th:text="${subnet.name}"></td>
+            <td th:text="${subnet.countComputers}"></td>
+            <td th:text="${subnet.lastScanDate}"></td>
+
+            <div th:if="${subnet.isOnline()}">
+                <td><img th:src="@{/images/online.png}" align="center" width="25" height="25">on</td>
+            </div>
+            <div th:if="${!subnet.isOnline()}">
+                <td><img th:src="@{/images/offline.png}" align="center" width="25" height="25">off</td>
+            </div>
+            <td th:text="${subnet.uptime} + мин"></td>
+            <td><a id="checkSubnet_id" class="link" onclick="checkSubnetMessage()"
+                   th:href="@{'/checkCurrentSubnet/'+ ${subnet.id}}">Инвентаризация отделения</a>
+            </td>
+            <td><a class="link" th:href="@{'/computers/' + ${subnet.id}}">Компьютеры</a></td>
+            <td><a class="link" th:href="@{'/editSubnet/' + ${subnet.id}}">Редактировать</a></td>
+            <td><a class="link" onclick="return confirm('Подтвердите удаление')"
+                   th:href="@{'/deleteSubnet/' + ${subnet.id}}">Удалить</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+<form align="center" th:action="@{/logout}" method="post">
+    <input class="button2" type="submit" value="Выйти"/>
+</form>
+</body>
+</html>

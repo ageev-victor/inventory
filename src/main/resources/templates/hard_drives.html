@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <link type="text/css" rel="stylesheet" data-th-href="@{/css/table_style.css}" />
+    <title>жесткие диски:</title>
+</head>
+<body>
+<div align="center">
+    <h1>Жесткий диск:</h1>
+    <br/><br/>
+    <table class="features-table">
+        <thead>
+        <tr>
+            <td class="grey">Модель</td>
+            <td class="grey">Серийник</td>
+            <td class="grey">Размер</td>
+            <td class="grey">Статус S.M.A.R.T</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="hardDrive : ${hardDrives}">
+            <td th:text="${hardDrive.model}"></td>
+            <td th:text="${hardDrive.serialNumber}"></td>
+            <td th:text="${hardDrive.size}"></td>
+            <td th:text="${hardDrive.status}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

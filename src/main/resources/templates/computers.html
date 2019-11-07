@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8"/>
+    <link type="text/css" rel="stylesheet" data-th-href="@{/css/table_style.css}"/>
+    <link type="text/css" rel="stylesheet" data-th-href="@{/css/button_style.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+    <title>Инвентаризация</title>
+</head>
+<body>
+<div align="center">
+    <a class="button1" th:href="@{'/subnets'}">К списку отделений</a>
+    <a class="button1" th:href="@{'/refreshStatus/' + ${listComputers.get(0).getSubnet().getId()}}">Обновить статус</a>
+    <table class="features-table">
+        <thead>
+        <tr>
+            <td>Статус</td>
+            <td class="grey">Имя</td>
+            <td class="grey">Отделение</td>
+            <td class="grey">Система</td>
+            <td class="grey">Мониторы</td>
+            <td class="grey">Жесткий диск</td>
+            <td class="grey">IP</td>
+            <td class="grey">Мак</td>
+            <td class="grey">Памяти</td>
+            <td class="grey">Серийник</td>
+            <td class="grey">Модель</td>
+            <td class="grey">Дата проверки</td>
+            <td class="green" nowrap>Действия</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="computer : ${listComputers}">
+            <div th:if="${computer.isOnline()}">
+                <td><img th:src="@{/images/online.png}" align="center" width="25" height="25">on</td>
+            </div>
+            <div th:if="${!computer.isOnline()}">
+                <td><img th:src="@{/images/offline.png}" align="center" width="25" height="25">off</td>
+            </div>
+            <td th:text="${computer.name}"></td>
+            <td th:text="${computer.subnet.name}"></td>
+            <td th:text="${computer.systemName}"></td>
+            <td><a th:href="@{'/monitors/' + ${computer.id}}">Мониторы</a></td>
+            <td><a th:href="@{'/hardDrives/' + ${computer.id}}">Жесткие диски</a></td>
+            <td th:text="${computer.ipAddress}"></td>
+            <td th:text="${computer.macAddress}"></td>
+            <td th:text="${computer.totalMemory}"></td>
+            <td th:text="${computer.serialNumber}"></td>
+            <td th:text="${computer.model}"></td>
+            <td th:text="${computer.date}"></td>
+            <td><a class="button1" th:href="@{'/computer_actions/' + ${computer.id}}">Действия</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <form th:action="@{/logout}" method="post">
+        <input class="button2" type="submit" value="Выйти"/>
+    </form>
+</div>
+</body>
+</html>
+
+
+

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <link type="text/css" rel="stylesheet" data-th-href="@{/css/table_style.css}" />
+    <title>Список мониторов:</title>
+</head>
+<body>
+<div align="center">
+    <h1>Список мониторов:</h1>
+    <br/><br/>
+    <table class="features-table">
+        <thead>
+        <tr>
+            <td class="grey">Модель</td>
+            <td class="grey">Серийник</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="monitor : ${listMonitors}">
+            <td th:text="${monitor.model}">Модель</td>
+            <td th:text="${monitor.serial}">Серийник</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

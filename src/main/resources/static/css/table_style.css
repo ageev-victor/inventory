@@ -1,0 +1,118 @@
+
+
+:focus {
+  outline:0;
+}
+body {
+  line-height:1;
+}
+ol, ul {
+  list-style:none;
+}
+table {
+  border-collapse:collapse;
+  border-spacing:0;
+}
+caption, th, td {
+  text-align:left;
+  font-weight:normal;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content:"";
+}
+blockquote, q {
+  quotes:"" "";
+}
+/*End NULL*/
+
+body {
+  font-family:Tahoma, Verdana, Arial, 'Sans Serif';
+  margin:10px;
+}
+
+.features-table
+{
+  width: auto;
+  margin:  auto;
+  border-collapse: separate;
+  border: 0;
+  border-spacing: 0;
+  text-shadow: 0 1px 0 #fff;
+  color: #2a2a2a;
+  background: #fafafa;
+  background-image: -moz-linear-gradient(top, #fff, #eaeaea, #fff); /* Firefox 3.6 */
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+.features-table td
+{
+  height: auto;
+  padding: 10px 10px;
+  border-bottom: 1px solid #cdcdcd;
+  box-shadow: 0 1px 0 white;
+  -moz-box-shadow: 0 1px 0 white;
+  -webkit-box-shadow: 0 1px 0 white;
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+
+}
+
+.features-table tbody td
+{
+
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  font-size: 85%;
+  font-weight: normal;
+  -moz-border-radius-topright: 15px;
+  -moz-border-radius-topleft: 15px;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+}
+
+
+.features-table td.grey
+{
+  background: #efefef;
+  background: rgba(144,144,144,0.15);
+  border-right: 1px solid white;
+}
+
+.features-table td.green
+{
+  background: #e7f3d4;
+  background: rgba(184,243,85,0.3);
+}
+
+.features-table thead td
+{
+  font-size: 100%;
+  font-weight: bold;
+  -moz-border-radius-topright: 10px;
+  -moz-border-radius-topleft: 10px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top: 1px solid #eaeaea;
+}
+
+.features-table tfoot td
+{
+
+  font-size: 100%;
+  font-weight: bold;
+  -moz-border-radius-bottomright: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom: 1px solid #dadada;
+}
+
+
+
+
+
+
+

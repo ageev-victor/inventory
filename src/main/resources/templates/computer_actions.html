@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8"/>
+    <link type="text/css" rel="stylesheet" data-th-href="@{/css/table_style.css}"/>
+    <link type="text/css" rel="stylesheet" data-th-href="@{/css/button_style.css}"/>
+    <link type="text/css" rel="stylesheet" data-th-href="@{/css/form_style.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+    <title>Действия</title>
+</head>
+<body>
+<div align="center">
+    <a class="button1" th:href="@{'/computers/' + ${subnetID}}">К списку компьютеров</a>
+    <table class="features-table">
+        <thead>
+        <tr>
+            <td style="color: #0071ff" th:text="${computer.name}" class="grey"></td>
+        </thead>
+        <tbody>
+        <tr>
+            <td><a class="button1" th:href="@{'/getListPrinters/' + ${computer.id}}">Подключеннные принтеры</a></td>
+            <td><a class="button1" th:href="@{'/whoLoggedOn/' + ${computer.id}}">Узнать кто залогинен?</a></td>
+            <td><a class="button1" th:href="@{'/clearCacheJava/' + ${computer.id}}">Удалить кеш Java</a></td>
+            <td><a class="button1" th:href="@{'/computerPowerOn/' + ${computer.id}}">Включить компьютер</a></td>
+            <td><a class="button1" th:href="@{'/computerPowerOff/' + ${computer.id}}">Выключить компьютер</a></td>
+        </tr>
+        <tr>
+            <td>
+                <ol th:each="printer : ${listPrinters}" style="color: #0071ff">
+                    <a th:text="${printer}"></a>
+                </ol>
+                <form class="form-style-5" th:action="@{'/addprinter/' + ${computer.id}}" method="post">
+                    <input class="form-control" required th:name="printer" modelattribute="printer" type="text" th:placeholder="confidential">
+                    <input type="submit" value="Добавить принтер">
+                </form>
+                <form class="form-style-5" th:action="@{'/deletePrinter/' + ${computer.id}}" method="post">
+                    <input class="form-control" required th:name="printer" modelattribute="printer" type="text" th:placeholder="confidential">
+                    <input type="submit" value="Удалить принтер">
+                </form>
+            </td>
+            <td><a th:text= "${login}"></a></td>
+        </tr>
+        <p></p>
+        </tbody>
+    </table>
+    <form th:action="@{/logout}" method="post">
+        <input class="button2" type="submit" value="Выйти"/>
+    </form>
+</div>
+</body>
